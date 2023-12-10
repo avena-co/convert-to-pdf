@@ -25,7 +25,10 @@ app.get('/convert-to-pdf', async (req, res) => {
         const { query } = url.parse(req.url, true);
 
         // create a browser instance
-        const browser = await puppeteer.launch({ headless: 'new' });
+        const browser = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            headless: 'new'
+        });
 
         // create a new page
         const page = await browser.newPage();
